@@ -1,28 +1,30 @@
-FROM pkdogcom/opencv3.2
-LABEL maintainer pkdogcom@gmail.com
+# Start with Ubuntu base image
+FROM ubuntu:16.04
+MAINTAINER Vlad Tamas <vlatamas@gmail.com>
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
-        build-essential \
-        cmake \
-        git \
-        wget \
-        libatlas-base-dev \
-        libboost-all-dev \
-        libgflags-dev \
-        libgoogle-glog-dev \
-        libhdf5-serial-dev \
-        libleveldb-dev \
-        liblmdb-dev \
-        libopencv-dev \
-        libprotobuf-dev \
-        libsnappy-dev \
-        protobuf-compiler \
-        python-dev \
-        python-numpy \
-        python-pip \
-        python-setuptools \
-        python-scipy && \
-    rm -rf /var/lib/apt/lists/*
+# Install git, wget, bc and dependencies
+RUN apt-get update && apt-get install -y \
+  git \
+  wget \
+  bc \
+  cmake \
+  libatlas-base-dev \
+  libatlas-dev \
+  libboost-all-dev \
+  libopencv-dev \
+  libprotobuf-dev \
+  libgoogle-glog-dev \
+  libgflags-dev \
+  protobuf-compiler \
+  libhdf5-dev \
+  libleveldb-dev \
+  liblmdb-dev \
+  libsnappy-dev \
+  python-dev \
+  python-pip \
+  python-numpy \
+  gfortran > /dev/null
+ 
 
 ENV CAFFE_ROOT=/opt/caffe
 WORKDIR $CAFFE_ROOT
